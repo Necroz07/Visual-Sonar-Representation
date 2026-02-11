@@ -62,7 +62,7 @@ while running:
             x = event.pos[0] -12
             y = event.pos[1] -13
             spawncoord= (x,y)
-            spawncenter= (x+23, y+23)
+            spawncenter= (x+13, y+13)
             spawntime = pygame.time.get_ticks()
 
     pygame.draw.circle(wave_surf, (0, 0, 0, 200), (300, 300), wave_radius, 5)
@@ -77,6 +77,8 @@ while running:
         wave_radius += wave_speed
 
 
+    elif inc==False:
+        wave_radius -= wave_speed
 
     
     if echo_wave==True:
@@ -85,13 +87,10 @@ while running:
         screen.blit(echo_surf, (0,0))
         echo_rad += echo_speed
 
-        if (dist-echo_rad)>1 and (dist-echo_rad) <5:
+        if ((dist-7)-echo_rad)>1 and ((dist-7)-echo_rad) <5:
             echo_wave=False
 
-
-
-    elif inc==False:
-        wave_radius -= wave_speed
+    
 
     if wave_radius > 415:
         inc = False
@@ -138,7 +137,7 @@ while running:
     pygame.display.flip()
 
     
-    clock.tick(60)  # limits FPS to 60
+    clock.tick(120)  # limits FPS to 60
 
 
 pygame.quit()

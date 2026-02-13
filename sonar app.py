@@ -32,6 +32,7 @@ wave_surf = pygame.Surface((600, 600), pygame.SRCALPHA)
 echo_surf = pygame.Surface((600, 600), pygame.SRCALPHA)
 
 score_overlay = pygame.Surface((600,600), pygame.SRCALPHA)
+pause_overlay = pygame.Surface((600,600), pygame.SRCALPHA)
 
 echo_wave = False
 
@@ -108,8 +109,13 @@ while running:
         elif event.type == pygame.KEYDOWN:
             if (event.key == pygame.K_ESCAPE) and (not pausebool):
                 pausebool = True
+                pygame.mixer.music.pause()
+                pause.play()
+                
             elif (event.key == pygame.K_ESCAPE) and (pausebool):
                 pausebool = False
+                pygame.mixer.music.stop()
+                pygame.mixer.music.unpause()
 
             
 

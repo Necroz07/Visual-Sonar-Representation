@@ -7,6 +7,18 @@ import time
 
 
 pygame.init()
+pygame.mixer.init()
+
+wave_startsound = pygame.mixer.Sound("wave start.wav")
+wave_endsound = pygame.mixer.Sound("wave end.wav")
+hitsound = pygame.mixer.Sound("cat.mp3")
+click = pygame.mixer.Sound("click.mp3")
+bgm = pygame.mixer.Sound("bg.mp3")
+
+sfx_vol = 0.6
+bg_vol = 0.6
+
+
 
 font = pygame.font.Font("Minecraftia-Regular.ttf", 19)
 
@@ -66,7 +78,19 @@ unit = font.render("1px = 10m", True, (255, 255, 255))
 summon = False
 inc=True
 
+
+
+
+
+bgm.play(-1)
+
 while running:
+
+    wave_startsound.set_volume(sfx_vol)
+    wave_endsound.set_volume(sfx_vol)
+    hitsound.set_volume(sfx_vol)
+    click.set_volume(sfx_vol)
+    bgm.set_volume(bg_vol)
 
     wave_surf.fill((0,0,0,0))
     echo_surf.fill((0,0,0,0))
@@ -78,9 +102,15 @@ while running:
 
         if event.type == pygame.MOUSEBUTTONUP:
             summon = True
+            click.play()
             spawn_rect.center = event.pos
             spawncenter= (spawn_rect.center[0]-12, spawn_rect.center[1]-12)
             spawntime = pygame.time.get_ticks()
+
+
+
+
+            
 
     pygame.draw.circle(wave_surf, (0, 0, 0, 200), obj_rect.center, wave_radius, 5)
 
@@ -140,6 +170,7 @@ while running:
 
             echo_wave=False
             hit_locked = False
+            hitsound.play()
 
             echo_endt = pygame.time.get_ticks()
             t2= echo_endt-echo_time
@@ -155,10 +186,12 @@ while running:
     if wave_radius > 415:
         inc = False
         circle_shrink_start = pygame.time.get_ticks()
+        wave_endsound.play()
 
     if wave_radius < 17:
         inc = True
         circle_time_start = pygame.time.get_ticks()
+        wave_startsound.play()
 
 
 
@@ -174,8 +207,7 @@ while running:
         if abs(dist-wave_radius)<=3 and not hit_locked and (pygame.time.get_ticks() >= hit_lockedtil):
             current= pygame.time.get_ticks()
             echo_time = pygame.time.get_ticks()
-
-
+            
             if inc:
                 t1=current-circle_time_start
             elif not inc:
@@ -185,6 +217,7 @@ while running:
             pygame.draw.circle(echo_surf, (0, 0, 0, 150), spawncenter, echo_rad, 5)
 
             echo_wave = True
+            wave_startsound.play()
             hit_locked = True
             hit_lockedtil = pygame.time.get_ticks() + locked_ms  
 

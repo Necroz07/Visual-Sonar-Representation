@@ -19,11 +19,18 @@ bgm = True
 sfx_vol = 0.8
 bg_vol = 0.6
 
+distances=[]
+
 
 font = pygame.font.Font("Minecraftia-Regular.ttf", 19)
 
 
 font1 = pygame.font.Font("Minecraftia-Regular.ttf", 57)
+
+
+font2 = pygame.font.Font("Minecraftia-Regular.ttf", 27)
+
+font3 = pygame.font.Font("Minecraftia-Regular.ttf", 17)
 
 
 text = font.render("Distance", True, (255, 255, 255))
@@ -111,7 +118,7 @@ while running:
             running = False
 
         #clicking when not paused
-        elif event.type == pygame.MOUSEBUTTONUP and pausech=='no':
+        elif event.type == pygame.MOUSEBUTTONUP and pausech=='no' and echo_wave==False and summon==False:
             summon = True
             click.play()
             spawn_rect.center = event.pos
@@ -139,6 +146,8 @@ while running:
             #tab disable
             elif (event.key == pygame.K_TAB) and (pausech=='tab'):
                 pausech = 'no'
+
+
 
         if event.type == pygame.MOUSEBUTTONDOWN and pausech=='pause':
             if boxbgm.collidepoint(event.pos):
@@ -230,6 +239,9 @@ while running:
 
             text = font.render(f"{distancem}m or {distancepx}px", True, (255, 255, 255))
             text2 = font.render(f"Time- {totaltime}s", True, (255, 255, 255))
+
+            i = (distancem, distancepx, totaltime, spawncenter)
+            distances.append(i)
 
     
 
@@ -339,6 +351,51 @@ while running:
             pygame.draw.line(score_overlay, (255, 0, 0), (360, 245), (520, 420), 8)
 
         screen.blit(score_overlay, (0,0))
+
+    if pausech=='tab':
+
+        if alpha<=210:
+            pygame.draw.polygon(tab_overlay, (0, 0, 0, alpha), [(0, 50), (0, 550), (600, 550), (600, 50)])
+            alpha+=5
+        else:
+            pygame.draw.polygon(tab_overlay, (0, 0, 0, 220), [(0, 50), (0, 550), (600, 550), (600, 50)])
+        
+        #outline box for pause
+        pygame.draw.polygon(tab_overlay, (0, 250, 0, 220), [(15, 65), (15, 535), (585, 535), (585, 65)], 3)
+
+
+
+        ctrltext= font2.render("Controls", True, (255, 255, 255, 255))
+
+        tab_overlay.blit(ctrltext, (220, 80))
+
+        clicktxt = font3.render("click: place ping", True, (255, 255, 255, 255))
+        tabtxt = font3.render("tab: overview", True, (255, 255, 255, 255))
+        esctxt = font3.render("esc: pause", True, (255, 255, 255, 255))
+
+        tab_overlay.blit(clicktxt, (50, 130))
+        tab_overlay.blit(tabtxt, (250, 130))
+        tab_overlay.blit(esctxt, (430, 130))
+
+        historytxt = font2.render("History", True, (255, 255, 255, 255))
+
+        tab_overlay.blit(historytxt, (230, 180))
+
+        if len(distances)<1:
+            disttxt = font3.render("Please place a node first.", True, (255, 255, 255, 255))
+
+            tab_overlay.blit(disttxt, (50, 240))
+
+        
+
+
+
+
+
+        
+        screen.blit(tab_overlay, (0, 0))
+
+
 
         
                              

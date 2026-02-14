@@ -24,6 +24,8 @@ bg_vol = 0.6
 
 distances=[]
 
+x=50
+
 
 font = pygame.font.Font("assets/Minecraftia-Regular.ttf", 19)
 
@@ -205,9 +207,6 @@ while running:
     pygame.draw.line(score_overlay, (50, 205, 50), (147, 60), (147, 27), 2)
 
 
-    
-
-    
 
     
     screen.blit(bg, (0,0))
@@ -327,8 +326,6 @@ while running:
         score_overlay.blit(sfxpng, (350, 245))
 
 
-
-
         if bgm:
         
             pygame.mixer.music.set_volume(bg_vol)
@@ -368,7 +365,7 @@ while running:
 
 
 
-        ctrltext= font2.render("Controls", True, (255, 255, 255, 255))
+        ctrltext= font2.render("Controls", True, (0, 255, 0, 255))
 
         tab_overlay.blit(ctrltext, (220, 80))
 
@@ -380,35 +377,37 @@ while running:
         tab_overlay.blit(tabtxt, (250, 130))
         tab_overlay.blit(esctxt, (430, 130))
 
-        historytxt = font2.render("History", True, (255, 255, 255, 255))
+        historytxt = font2.render("History", True, (0, 255, 0, 255))
 
         tab_overlay.blit(historytxt, (230, 180))
+
+        titles = font3.render(f"Distance(m)/(px):                  Time:                      Coordinates: ", True, (0, 255, 0, 255))
+
+        tab_overlay.blit(titles, (30, 240))
 
         if len(distances)<1:
             disttxt = font3.render("Please place a node first.", True, (255, 255, 255, 255))
 
             tab_overlay.blit(disttxt, (50, 240))
 
-        
+        else:
+            
+            tab_overlay.blit(titles, (30, 240))
 
-
-
-
+            
+            y=0
+            for j in range(-1, -6, -1):
+                try:
+                    disttxt = font3.render(f"{distances[j][0]}/{distances[j][1]}                                 {distances[j][2]}                         {distances[j][3]}", True, (255, 255, 255, 255))
+                    y+=1
+                    tab_overlay.blit(disttxt, (30, 240+(x*y)))
+                    
+                except:
+                    print(".")
+            
 
         
         screen.blit(tab_overlay, (0, 0))
-
-
-
-        
-                             
-        
-
-
-
-
-
-    
 
     pygame.display.flip()
     

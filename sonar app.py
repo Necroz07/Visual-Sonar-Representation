@@ -2,17 +2,20 @@
 
 import pygame
 import math
-import time
+import os
+from pathlib import Path
+
+os.chdir(Path(__file__).resolve().parent)
 
 
 pygame.init()
 pygame.mixer.init()
 
-wave_startsound = pygame.mixer.Sound("wave start.wav")
-wave_endsound = pygame.mixer.Sound("wave end.wav")
-hitsound = pygame.mixer.Sound("cat.wav")
-click = pygame.mixer.Sound("click.mp3")
-pause = pygame.mixer.Sound("pause.wav")
+wave_startsound = pygame.mixer.Sound("sounds/wave_start.wav")
+wave_endsound = pygame.mixer.Sound("sounds/wave_end.wav")
+hitsound = pygame.mixer.Sound("sounds/cat.wav")
+click = pygame.mixer.Sound("sounds/click.mp3")
+pause = pygame.mixer.Sound("sounds/pause.wav")
 
 sfx = True
 bgm = True
@@ -22,15 +25,15 @@ bg_vol = 0.6
 distances=[]
 
 
-font = pygame.font.Font("Minecraftia-Regular.ttf", 19)
+font = pygame.font.Font("assets/Minecraftia-Regular.ttf", 19)
 
 
-font1 = pygame.font.Font("Minecraftia-Regular.ttf", 57)
+font1 = pygame.font.Font("assets/Minecraftia-Regular.ttf", 57)
 
 
-font2 = pygame.font.Font("Minecraftia-Regular.ttf", 27)
+font2 = pygame.font.Font("assets/Minecraftia-Regular.ttf", 27)
 
-font3 = pygame.font.Font("Minecraftia-Regular.ttf", 17)
+font3 = pygame.font.Font("assets/Minecraftia-Regular.ttf", 17)
 
 
 text = font.render("Distance", True, (255, 255, 255))
@@ -47,33 +50,33 @@ tab_overlay = pygame.Surface((600,600), pygame.SRCALPHA)
 
 echo_wave = False
 
-icon = pygame.image.load("icon.png").convert_alpha()
+icon = pygame.image.load("assets/icon.png").convert_alpha()
 icon = pygame.transform.scale(icon, (50, 50))
 icon_rect = icon.get_rect()
 
-clock1 = pygame.image.load("clock.png").convert_alpha()
+clock1 = pygame.image.load("assets/clock.png").convert_alpha()
 clock1 = pygame.transform.scale(clock1, (40,40))
 clock1_rect = clock1.get_rect()
 
 
-musicpng = pygame.image.load("music.png")
+musicpng = pygame.image.load("assets/music.png")
 musicpng = pygame.transform.scale(musicpng, (180, 180))
 musicpng_rect = musicpng.get_rect()
 
 
-sfxpng = pygame.image.load("sfx.png")
+sfxpng = pygame.image.load("assets/sfx.png")
 sfxpng = pygame.transform.scale(sfxpng, (180, 180))
 sfxpng_rect = sfxpng.get_rect()
 
 
-bg = pygame.image.load("background.png").convert()
+bg = pygame.image.load("assets/background.png").convert()
 bg = pygame.transform.scale(bg, (600,600))
 
-obj = pygame.image.load("object1.png").convert_alpha()
+obj = pygame.image.load("assets/object1.png").convert_alpha()
 obj = pygame.transform.scale(obj, (60, 60))
 obj_rect = obj.get_rect(center=(300,300))
 
-spawn = pygame.image.load("spawn.png").convert_alpha()
+spawn = pygame.image.load("assets/spawn.png").convert_alpha()
 spawn = pygame.transform.scale(spawn, (25, 25))
 spawn_rect = spawn.get_rect()
 
@@ -102,7 +105,7 @@ summon = False
 inc=True
 pausech = 'no'
 
-pygame.mixer.music.load("bg.mp3")
+pygame.mixer.music.load("sounds/bg.mp3")
 pygame.mixer.music.play(-1)
 
 

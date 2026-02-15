@@ -10,6 +10,9 @@ The project visualizes how sonar systems estimate distance by measuring the time
 
 ### https://www.youtube.com/watch?v=UHLWVBOWFMs
 
+<img width="588" height="627" alt="image" src="https://github.com/user-attachments/assets/98ca4987-2e8c-4427-828f-085fd3c66ea1" />
+
+
 ## How It Works
 
 ### Sonar Simulation Logic
@@ -80,7 +83,7 @@ This project was built to explore:
 
 ---
 
-## How to Run (requires a Firestore service key (not provided))
+## How to Run
 
 1. Clone the repository
    ```

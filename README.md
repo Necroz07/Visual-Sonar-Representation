@@ -20,7 +20,7 @@ The project visualizes how sonar systems estimate distance by measuring the time
 - A wave pulse originates from the center point and expands outward
 - When the wave reaches a placed target point, an echo wave is triggered
 - The system measures:
-- Time from emission to contact
+    - Time from emission to contact
     - Time for echo return
     - Distance is calculated using time-of-flight principles and a simulated speed of sound
 - Results are displayed in both meters and pixels
